@@ -1,0 +1,129 @@
+{
+    "Fruit": {
+        "Fruit1": {
+            "Id": 1,
+            "Name": "Apple",
+            "Price": 1000,
+            "Season": "Spring",
+            "StoreAmount": 2000
+        },
+        "Fruit2": {
+            "Id": 2,
+            "Name": "Mango",
+            "Price": 1200,
+            "Season": "Summer",
+            "StoreAmount": 3000
+        },
+        "Fruit3": {
+            "Id": 3,
+            "Name": "WaterMelon",
+            "Price": 1500,
+            "Season": "Fall",
+            "StoreAmount": 4000
+        },
+        "Fruit4": {
+            "Id": 4,
+            "Name": "Durian",
+            "Price": 1600,
+            "Season": "Winter",
+            "StoreAmount": 7000
+        },
+        "Fruit5": {
+            "Id": 5,
+            "Name": "Orange",
+            "Price": 900,
+            "Season": "Spring",
+            "StoreAmount": 2500
+        },
+        "Fruit6": {
+            "Id": 6,
+            "Name": "Peach",
+            "Price": 1900,
+            "Season": "Fall",
+            "StoreAmount": 2700
+        },
+        "Fruit7": {
+            "Id": 7,
+            "Name": "Papaya",
+            "Price": 800,
+            "Season": "Winter",
+            "StoreAmount": 2200
+        },
+        "Fruit8": {
+            "Id": 8,
+            "Name": "Blueberry",
+            "Price": 400,
+            "Season": "Summer",
+            "StoreAmount": 3500
+        },
+        "Fruit9": {
+            "Id": 9,
+            "Name": "Strawberry",
+            "Price": 500,
+            "Season": "Summer",
+            "StoreAmount": 3400
+        },
+        "Fruit10": {
+            "Id": 10,
+            "Name": "Banana",
+            "Price": 1000,
+            "Season": "Spring",
+            "StoreAmount": 2000
+        },
+        "Fruit11": {
+            "Id": 11,
+            "Name": "Coconut",
+            "Price": 1200,
+            "Season": "Summer",
+            "StoreAmount": 3000
+        },
+        "Fruit12": {
+            "Id": 12,
+            "Name": "Lime",
+            "Price": 1500,
+            "Season": "Fall",
+            "StoreAmount": 4000
+        },
+        "Fruit13": {
+            "Id": 13,
+            "Name": "Kiwi",
+            "Price": 1600,
+            "Season": "Winter",
+            "StoreAmount": 7000
+        },
+        "Fruit14": {
+            "Id": 14,
+            "Name": "Passion",
+            "Price": 900,
+            "Season": "Spring",
+            "StoreAmount": 2500
+        },
+        "Fruit15": {
+            "Id": 15,
+            "Name": "Pear",
+            "Price": 1900,
+            "Season": "Fall",
+            "StoreAmount": 2700
+        },
+        "Fruit16": {
+            "Id": 16,
+            "Name": "Apricot",
+            "Price": 800,
+            "Season": "Winter",
+            "StoreAmount": 2200
+        },
+        "Fruit17": {
+            "Id": 17,
+            "Name": "Cherry",
+            "Season": "Summer",
+            "StoreAmount": 3500
+        },
+        "Fruit18": {
+            "Id": 18,
+            "Name": "Fig",
+            "Price": 500,
+            "Season": "Summer",
+            "StoreAmount": 3400
+        }
+    }
+}
