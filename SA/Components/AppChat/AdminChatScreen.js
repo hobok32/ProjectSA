@@ -3,25 +3,19 @@ import { Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native'
 import User from '../../User';
 import firebase from 'firebase';
 import Send from 'react-native-vector-icons/Ionicons';
-import Users from 'react-native-vector-icons/Entypo';
 
-export default class ChatScreen extends Component {
-    static navigationOptions = ({ navigation }) => {
+export default class AdminChatScreen extends Component {
+    static navigationOptions = () => {
         return {
-            title: 'Chat',
-            headerRight: (
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Users name="user" size={30} style={{ fontWeight: 'bold', margin: 10, textAlign: 'center', color: 'black' }} />
-                </TouchableOpacity>
-            )
+            title: 'Chat'
         }
     }
     constructor(props) {
         super(props);
         this.state = {
             person: {
-                name: 'Admin',
-                phone: '0359679911',
+                name: props.navigation.getParam('name'),
+                phone: props.navigation.getParam('phone'),
             },
             textMessage: '',
             messageList: []
@@ -50,7 +44,7 @@ export default class ChatScreen extends Component {
         let result = (d.getHours() < 10 ? '0' : '') + d.getHours() + ':';
         result += (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
         if (c.getDay() != d.getDay()) {
-            result = d.getDay() + ' ' + d.getMonth() + ' ' + result;
+            result = d.getFullYear() + ' ' + result;
         }
         return result;
     }
@@ -111,6 +105,7 @@ export default class ChatScreen extends Component {
                     <TouchableOpacity onPress={() => this.sendMessage()}>
                         <Send style={{ padding: 5, margin: 5, textAlign: 'center', justifyContent: 'center', color: 'slateblue' }} name="md-send" size={50} />
                     </TouchableOpacity>
+
 
                 </View>
             </View>

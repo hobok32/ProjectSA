@@ -8,6 +8,11 @@ width = Dimensions.get("window").width;
 height = Dimensions.get("window").height;
 
 export default class MainScreen extends Component {
+    static navigationOptions = () => {
+        return {
+            header: null
+        }
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -27,14 +32,16 @@ export default class MainScreen extends Component {
         }
     }
     componentDidMount() {
-        fetch("http://soapservice.gear.host/api/Fruit", { method: "GET", body: null })
+        fetch(`http://projectsa.gear.host/api/getFruitAndChiNhanhByIdCH/${this.props.navigation.getParam('IdCH')}`, { method: "GET", body: null })
             .then((response) => response.json())
             .then((responseData) => {
                 this.setState({
-                    data: responseData
+                    data: responseData.ChiNhanh
                 })
+                console.log(this.state.data)
             })
             .done()
+
     }
     handleChangeSearch = (text) => {
         this.setState({
@@ -194,10 +201,11 @@ export default class MainScreen extends Component {
         this.refs.flatList.scrollToIndex({ animated: true, index: ind - 1 });
     }
     render() {
+        console.log(this.props.navigation.getParam('IdCH'))
         return (
             <View style={styles.container}>
                 <Text style={styles.headerText}>
-                    Fruits
+                    Chi nhánh
                 </Text>
 
                 <View style={styles.searchView}>
@@ -212,7 +220,7 @@ export default class MainScreen extends Component {
                     <View style={{ flexDirection: "row" }}>
                         <Text style={styles.idHeader}>ID</Text>
                         <Text style={styles.nameHeader}>Name</Text>
-                        <Text style={styles.typeHeader}>Price</Text>
+                        <Text style={styles.typeHeader}>Phone</Text>
                     </View>
 
                     <FlatList

@@ -30,13 +30,13 @@ export default class FlatListItem extends Component {
                     fontSize: 15, fontWeight: "bold", textAlign: "center", margin: 5, color: this.state.color, color: (this.state.isColor == false) ? this.state.color : this.state.colorN,
                     width: this.props.width * 0.4, backgroundColor: "gainsboro"
                 }}>
-                    {this.props.item.Name}
+                    {this.props.item.TenChuChiNhanh}
                 </Text>
                 <Text style={{
                     fontSize: 15, fontWeight: "bold", textAlign: "center", margin: 5, color: this.state.color, color: (this.state.isColor == false) ? this.state.color : this.state.colorN,
                     width: this.props.width * 0.3, backgroundColor: "gainsboro"
                 }}>
-                    {this.props.item.Price}
+                    {this.props.item.SoDienThoaiChiNhanh}
                 </Text>
                 <TouchableOpacity
                     style={{

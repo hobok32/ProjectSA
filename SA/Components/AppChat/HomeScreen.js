@@ -4,6 +4,16 @@ import User from '../../User';
 import firebase from 'firebase';
 
 export default class HomeScreen extends React.Component {
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Chats',
+            headerRight: (
+                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                    <Text>PROFILE</Text>
+                </TouchableOpacity>
+            )
+        }
+    }
     state = {
         users: []
     }
@@ -35,6 +45,7 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat', item)}>
                 <Text>{item.name}</Text>
             </TouchableOpacity>
+
         )
     }
 
