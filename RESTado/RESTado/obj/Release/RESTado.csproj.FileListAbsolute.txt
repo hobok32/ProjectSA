@@ -61,3 +61,4 @@ C:\Users\MiAn\source\repos\RESTado\RESTado\obj\Release\RESTado.csproj.CoreCompil
 C:\Users\MiAn\source\repos\RESTado\RESTado\obj\Release\RESTado.csproj.CopyComplete
 C:\Users\MiAn\source\repos\RESTado\RESTado\obj\Release\RESTado.dll
 C:\Users\MiAn\source\repos\RESTado\RESTado\obj\Release\RESTado.pdb
+C:\Users\MiAn\source\repos\RESTado\RESTado\obj\Release\RESTado.csprojAssemblyReference.cache

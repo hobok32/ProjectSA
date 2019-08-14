@@ -25,6 +25,41 @@ namespace RESTado.Controllers
             return fruitStores;
         }
 
+        [HttpGet, Route("getAllFruitStore/{keyword}")]
+        public List<CuaHangTraiCay> GetFruitStoreByKeyword(string keyword)
+        {
+            List<CuaHangTraiCay> fruitStore = new ProjectDAO().SelectFruitStoreByKeyword(keyword);
+            return fruitStore;
+        }
+
+        [HttpGet, Route("getAllFruitStore/distrist/{distrist}")]
+        public List<CuaHangTraiCay> GetFruitStoreByDistrist(string distrist)
+        {
+            List<CuaHangTraiCay> fruitStore = new ProjectDAO().SelectFruitStoreByDistrist(distrist);
+            return fruitStore;
+        }
+
+        [HttpGet, Route("getAllFruitChiNhanh")]
+        public List<ChiNhanh> GetFruitChiNhanh()
+        {
+            List<ChiNhanh> cn = new ProjectDAO().SelectAllFruitChiNhanh();
+            return cn;
+        }
+
+        [HttpGet, Route("getAllFruitChiNhanh/{idch}")]
+        public List<ChiNhanh> GetFruitChiNhanhByIdCH(int idch)
+        {
+            List<ChiNhanh> cn = new ProjectDAO().SelectAllChiNhanhByIdCH(idch);
+            return cn;
+        }
+
+        [HttpGet, Route("getAllFruitChiNhanh/{idch}/{keyword}")]
+        public List<ChiNhanh> GetFruitChiNhanhByKeyword(string keyword, int idch)
+        {
+            List<ChiNhanh> cn = new ProjectDAO().SelectFruitChiNhanhByKeywordAndIdCH(keyword, idch);
+            return cn;
+        }
+
         [HttpGet, Route("getFruitAndChiNhanhByIdCH/{idCH:int}")]
         public Object GetFruitAndChiNhanh(int IdCH)
         {
@@ -35,25 +70,19 @@ namespace RESTado.Controllers
             return (Object)cnFruit;
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [HttpPost, Route("updateChiNhanhByIdAndIdCH/{idCH:int}")]
+        public bool UpdateChiNhanh(ChiNhanh newCn, int idCH)
         {
-            return "value";
+            bool result = new ProjectDAO().UpdateChiNhanh(newCn, idCH);
+            return result;
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        [HttpDelete, Route("deleteChiNhanh/{id}")]
+        public bool DeleteChiNhanh(int id)
         {
+            bool result = new ProjectDAO().DeleteChiNhanh(id);
+            return result;
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }
