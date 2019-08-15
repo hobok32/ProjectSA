@@ -9,4 +9,4 @@ import LoginScreen from './Components/AppChat/LoginScreen';
 import AppFruitAdmin from './Components/Project/AppFruitAdmin';
 import MainScreen from './Components/MainScreen';
 
-AppRegistry.registerComponent(appName, () => AppFruitAdmin);
+AppRegistry.registerComponent(appName, () => App);

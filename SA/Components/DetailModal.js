@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Dimensions, View, StyleSheet } from 'react-native';
+import { Text, Dimensions, View, StyleSheet, Image } from 'react-native';
 import Modal from 'react-native-modalbox';
 var screen = Dimensions.get('window');
 export default class DetailModal extends Component {
@@ -22,51 +22,14 @@ export default class DetailModal extends Component {
             >
                 <View style={styles.container}>
                     <Text style={styles.header}>
-                        DETAIL
+                        {this.props.screenProps.nameStoreDetail} {this.props.screenProps.idChiNhanhDetail}
                     </Text>
                     <View style={styles.body}>
-                        <View style={styles.bodyDetail}>
-                            <Text style={styles.textDetail}>
-                                ID
-                            </Text>
-                            <Text style={styles.textDetail}>
-                                Name
-                            </Text>
-                            <Text style={styles.textDetail}>
-                                Price
-                            </Text>
-                        </View>
-
-                        <View style={styles.bodyDetailState}>
-                            <Text style={styles.textDetailState}>
-                                {this.props.screenProps.idDetail}
-                            </Text>
-                            <Text style={styles.textDetailState}>
-                                {this.props.screenProps.nameDetail}
-                            </Text>
-                            <Text style={styles.textDetailState}>
-                                {this.props.screenProps.priceDetail}
-                            </Text>
-                        </View>
-
-                        <View style={styles.bodyDetail2}>
-                            <Text style={styles.textDetail2a}>
-                                Season
-                            </Text>
-                            <Text style={styles.textDetail2b}>
-                                Store Amount
-                            </Text>
-                        </View>
-
-                        <View style={styles.bodyDetailState2}>
-                            <Text style={styles.textDetailState2a}>
-                                {this.props.screenProps.seasonDetail}
-                            </Text>
-                            <Text style={styles.textDetailState2b}>
-                                {this.props.screenProps.storeAmountDetail}
-                            </Text>
-                        </View>
+                        <Image style={styles.img} source={{ uri: `${this.props.screenProps.imgDetail}` }} />
+                        <Text style={styles.txt}>Trái cây: </Text>
+                        <Text style={styles.txtFr}>...</Text>
                     </View>
+
 
                 </View>
             </Modal>
@@ -76,42 +39,22 @@ export default class DetailModal extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, alignItems: 'center', justifyContent: 'center'
+        flex: 1, alignItems: 'flex-start', justifyContent: 'center'
     },
     header: {
-        fontSize: 20, fontWeight: 'bold', color: 'tan', textAlign: 'center', margin: 5, borderBottomWidth: 1, borderBottomColor: 'slateblue'
+        alignSelf: 'center', fontSize: 20, fontWeight: 'bold', color: 'tan', textAlign: 'center', margin: 5, borderBottomWidth: 1, borderBottomColor: 'slateblue'
     },
     body: {
-        flex: 1,
+        flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start'
     },
-    bodyDetail: {
-        flex: 0.3, flexDirection: 'row'
+    img: {
+        width: 100, height: 100, margin: 10, borderRadius: 50, paddingRight: 80, alignSelf: 'flex-start'
     },
-    bodyDetailState: {
-        flex: 0.2, flexDirection: 'row'
+    txt: {
+        fontWeight: 'bold', fontSize: 15, color: 'slateblue', margin: 10, marginRight: 0
     },
-    bodyDetail2: {
-        flex: 0.3, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end'
-    },
-    bodyDetailState2: {
-        flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', marginBottom: 10
-    },
-    textDetail: {
-        margin: 5, marginBottom: 0, fontSize: 13, color: 'slateblue', textAlign: 'center', fontWeight: 'bold', width: (screen.width - 80) / 3
-    },
-    textDetailState: {
-        marginLeft: 5, marginRight: 5, fontSize: 11, color: 'slategray', textAlign: 'center', fontWeight: 'bold', width: (screen.width - 80) / 3
-    },
-    textDetail2a: {
-        margin: 0, marginBottom: 0, fontSize: 13, color: 'slateblue', textAlign: 'center', fontWeight: 'bold', width: (screen.width - 80) / 2, borderRightWidth: 1, borderRightColor: 'slateblue'
-    },
-    textDetail2b: {
-        margin: 0, marginBottom: 0, fontSize: 13, color: 'slateblue', textAlign: 'center', fontWeight: 'bold', width: (screen.width - 80) / 2, borderRightWidth: 0
-    },
-    textDetailState2a: {
-        margin: 0, marginBottom: 0, fontSize: 13, color: 'slategray', textAlign: 'center', fontWeight: 'bold', width: (screen.width - 80) / 2, borderRightWidth: 1, borderRightColor: 'slateblue'
-    },
-    textDetailState2b: {
-        margin: 0, marginBottom: 0, fontSize: 12, color: 'slategray', textAlign: 'center', fontWeight: 'bold', width: (screen.width - 80) / 2, borderRightWidth: 0
-    },
+    txtFr: {
+        fontWeight: 'bold', fontSize: 15, color: 'black', marginTop: 10, marginLeft: 0, width: 100
+    }
+
 })

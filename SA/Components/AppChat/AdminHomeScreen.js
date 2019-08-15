@@ -51,7 +51,7 @@ export default class AdminHomeScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'slateblue', margin: 10, padding: 10 }}>List of User</Text>
+                <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'slateblue', margin: 10, padding: 10, borderBottomWidth: 1, borderBottomColor: 'darkviolet' }}>List of User</Text>
                 <FlatList
                     ref={"flatListChat"}
                     initialNumToRender={10}

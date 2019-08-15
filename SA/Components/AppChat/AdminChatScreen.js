@@ -3,6 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native'
 import User from '../../User';
 import firebase from 'firebase';
 import Send from 'react-native-vector-icons/Ionicons';
+import Down from 'react-native-vector-icons/Feather';
 
 export default class AdminChatScreen extends Component {
     static navigationOptions = () => {
@@ -74,31 +75,42 @@ export default class AdminChatScreen extends Component {
                 flexDirection: 'row', width: '60%',
                 backgroundColor: item.from === User.phone ? 'blue' : 'yellow', borderRadius: 5, marginBottom: 10
             }}>
-                <Text style={{ color: 'black', padding: 7, fontSize: 16, alignSelf: item.from === User.phone ? 'flex-end' : 'flex-start', }}>
+                <Text style={{
+                    color: 'black', padding: 7, fontSize: 16, width: 170, borderRadius: 10,
+                    alignSelf: item.from === User.phone ? 'flex-end' : 'flex-start',
+                    textAlign: item.from === User.phone ? 'right' : 'left',
+                    backgroundColor: item.from === User.phone ? 'slateblue' : 'darkolivegreen'
+                }}>
                     {item.message}
                 </Text>
-                <Text style={{ color: 'tan', padding: 3, fontSize: 12, alignSelf: item.from === User.phone ? 'flex-end' : 'flex-start', }}>
+                <Text style={{ marginBottom: 10, color: 'tan', padding: 3, fontSize: 12, alignSelf: item.from === User.phone ? 'flex-end' : 'flex-start', }}>
                     {this.converTime(item.time)}
                 </Text>
             </View>
         )
     }
-
+    _scrollToEnd = () => {
+        this.refs.listChat.scrollToEnd(true);
+    }
     render() {
         return (
             <View style={{ flex: 1 }}>
                 <FlatList
-                    style={{ height: 300, padding: 10 }}
+                    ref={"listChat"}
+                    style={{ height: 380, padding: 10 }}
                     data={this.state.messageList}
                     renderItem={this.renderRow}
                     keyExtractor={(item, index) => index.toString()}
                 />
-                <View style={{ flex: 1, flexDirection: 'row' }}>
-
+                <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'whitesmoke' }}>
+                    <TouchableOpacity onPress={() => this._scrollToEnd()}>
+                        <Down style={{ padding: 5, margin: 5, textAlign: 'center', justifyContent: 'center', color: 'slateblue' }} name="chevrons-down" size={50} />
+                    </TouchableOpacity>
                     <TextInput
-                        style={{ padding: 10, borderWidth: 1, borderColor: 'black', width: '80%', height: 50, margin: 10, borderRadius: 5 }}
+                        style={{ padding: 10, borderWidth: 1, borderColor: 'black', width: '60%', height: 50, margin: 10, borderRadius: 5 }}
                         value={this.state.textMessage}
                         placeholder="Type..."
+                        autoCapitalize="words"
                         onChangeText={this.handleChange('textMessage')}
                     />
 

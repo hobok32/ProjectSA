@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         flex: 1, justifyContent: 'center', alignItems: 'center'
     },
     item: {
-        fontSize: 20, color: 'tan', margin: 5, padding: 5, width: 200, backgroundColor: 'gainsboro', textAlign: 'center'
+        fontSize: 20, color: 'tan', margin: 5, padding: 5, width: 200,
+        backgroundColor: 'darkslategrey', textAlign: 'center', borderRadius: 5
     }
 })

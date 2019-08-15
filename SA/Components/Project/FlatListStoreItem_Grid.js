@@ -8,7 +8,7 @@ export default class FlatListStoreItem_Grid extends Component {
                 <Image style={styles.Image} source={{ uri: `${this.props.item.Image}` }} />
                 <Text style={styles.nameStore}>{this.props.item.TenCuaHang}</Text>
                 <TouchableOpacity
-                    onPress={() => this.props.navigation.navigate('FruitStoreDetail', { IdCH: this.props.item.Id }, console.log(this.props.item.Id))}
+                    onPress={() => this.props.navigation.navigate('FruitStoreDetail', { item: this.props.item }, console.log(this.props.item.Id))}
                     onLongPress={() => { this.props.screenProps._onPressStoreModal() }}
                     style={{
                         position: 'absolute',

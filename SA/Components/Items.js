@@ -43,14 +43,24 @@ export default class FlatListItem extends Component {
                         position: 'absolute',
                         top: 0, bottom: 0, left: 0, right: 0
                     }}
+                    onPress={() => this.props.screenProps.handleChangeItem(
+                        'id', `${this.props.item.Id}`,
+                        'idType', `${this.props.item.IdLoai}`,
+                        'phoneNum', `${this.props.item.SoDienThoaiChiNhanh}`,
+                        'address', `${this.props.item.DiaChiChiNhanh}`,
+                        'phuong', `${this.props.item.Phuong}`,
+                        'quan', `${this.props.item.Quan}`,
+                        'city', `${this.props.item.ThanhPho}`,
+                        'idStore', `${this.props.item.IdCuaHang}`,
+                        'image', `${this.props.item.Image}`,
+                        'nameOwner', `${this.props.item.TenChuChiNhanh}`
+                    )}
                     onPressIn={this.colorChange}
                     onPressOut={this.resetColor}
                     onLongPress={() => this.props.screenProps._onPressDetailModal(
-                        this.props.item.Id,
-                        this.props.item.Name,
-                        this.props.item.Price,
-                        this.props.item.Season,
-                        this.props.item.StoreAmount
+                        this.props.nameStore,
+                        this.props.item.Image,
+                        this.props.item.Id
                     )}
                 >
                 </TouchableOpacity>

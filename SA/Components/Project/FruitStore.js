@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'r
 import Search from 'react-native-vector-icons/FontAwesome5';
 import FlatListStoreItem_Grid from './FlatListStoreItem_Grid';
 import StoreModal from './ModalStore';
+import Chat from 'react-native-vector-icons/Fontisto';
 
 export default class FruitStore extends Component {
     static navigationOptions = () => {
@@ -45,6 +46,9 @@ export default class FruitStore extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSearch}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+                        <Chat name="messenger" size={40} style={styles.searchBtn} />
+                    </TouchableOpacity>
                     <TextInput
                         placeholder='Search'
                         style={styles.input}
@@ -66,7 +70,7 @@ export default class FruitStore extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity>
-                        <Text style={styles.filterBtn}>Quận Phú Nhuận</Text>
+                        <Text style={styles.filterBtn}>Quận 5</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -115,7 +119,7 @@ const styles = StyleSheet.create({
         flex: 7.8, backgroundColor: 'white'
     },
     input: {
-        padding: 10, borderWidth: 1, borderColor: 'black', width: '80%', margin: 10, borderRadius: 5
+        padding: 10, borderWidth: 1, borderColor: 'black', width: '60%', margin: 10, borderRadius: 5
     },
     searchBtn: {
         fontWeight: 'normal', margin: 10, textAlign: 'center', color: 'black', marginLeft: 0

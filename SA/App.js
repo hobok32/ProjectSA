@@ -11,7 +11,9 @@ import AdminChatScreen from './Components/AppChat/AdminChatScreen';
 import AppFruitAdmin from './Components/Project/AppFruitAdmin';
 
 const AppStack = createStackNavigator({ Chat: ChatScreen, Home: HomeScreen, Profile: ProfileScreen });
-const AdminAppStack = createStackNavigator({ Home: AdminHomeScreen, ProfileAdmin: AdminProfileScreen, AdminChat: AdminChatScreen, FruitAdmin: AppFruitAdmin });
+const AdminAppStack = createStackNavigator({
+  FruitAdmin: AppFruitAdmin, Home: AdminHomeScreen, ProfileAdmin: AdminProfileScreen, AdminChat: AdminChatScreen,
+});
 const AuthStack = createStackNavigator({ Login: LoginScreen });
 
 export default createAppContainer(createSwitchNavigator(
