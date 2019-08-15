@@ -65,8 +65,9 @@ namespace RESTado.Controllers
         {
             List<ChiNhanh> cn = new ProjectDAO().SelectAllChiNhanhByIdCH(IdCH);
             List<Fruit> fruits = new ProjectDAO().SelectAllFruitByIdCH(IdCH);
+            List<BinhLuanCuaHang> cmt = new ProjectDAO().SelectAllBinhLuanByIdCH(IdCH);
 
-            ChiNhanhVaTraiCayByIdCH cnFruit = new ChiNhanhVaTraiCayByIdCH(cn, fruits);
+            ChiNhanhVaTraiCayByIdCH cnFruit = new ChiNhanhVaTraiCayByIdCH(cn, fruits, cmt);
             return (Object)cnFruit;
         }
 
@@ -77,6 +78,13 @@ namespace RESTado.Controllers
             return result;
         }
 
+        [HttpPost, Route("addChiNhanh")]
+        public bool AddChiNhanh(ChiNhanh newCn)
+        {
+            bool result = new ProjectDAO().AddChiNhanh(newCn);
+            return result;
+        }
+
         [HttpDelete, Route("deleteChiNhanh/{id}")]
         public bool DeleteChiNhanh(int id)
         {
@@ -84,5 +92,6 @@ namespace RESTado.Controllers
             return result;
         }
 
+        
     }
 }

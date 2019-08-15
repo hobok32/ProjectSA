@@ -96,7 +96,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\projectsa - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\projectsa - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\projectsa - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\projectsa - Web Deploy1.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

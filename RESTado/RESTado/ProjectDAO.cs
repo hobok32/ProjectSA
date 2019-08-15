@@ -196,6 +196,28 @@ namespace RESTado
             return cn;
         }
 
+        public List<BinhLuanCuaHang> SelectAllBinhLuanByIdCH(int IdCH)
+        {
+            List<BinhLuanCuaHang> cmt = new List<BinhLuanCuaHang>();
+            SqlConnection con = new SqlConnection(strCon);
+            con.Open();
+            string strCmd = "select a.* from binhluancuahang a, cuahangtraicay b where a.IdCuaHang=b.Id and a.IdCuaHang = @Id";
+            SqlCommand cmd = new SqlCommand(strCmd, con);
+            cmd.Parameters.Add(new SqlParameter("@Id", IdCH));
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                BinhLuanCuaHang c = new BinhLuanCuaHang();
+                c.Id = (int)dr["Id"];
+                c.PhoneAcc = (string)dr["PhoneAcc"];
+                c.BinhLuan = (string)dr["BinhLuan"];
+                c.IdCuaHang = (int)dr["IdCuaHang"];
+                cmt.Add(c);
+            }
+            con.Close();
+            return cmt;
+        }
+
         public List<ChiNhanh> SelectAllChiNhanhByIdCH(int IdCH)
         {
             List<ChiNhanh> cn = new List<ChiNhanh>();
@@ -257,5 +279,24 @@ namespace RESTado
             cmd1.ExecuteNonQuery();
             return cmd.ExecuteNonQuery() > 0;
         }
+
+        public bool AddChiNhanh(ChiNhanh newCn)
+        {
+            SqlConnection con = new SqlConnection(strCon);
+            con.Open();
+            string strCmd = "INSERT INTO ChiNhanh VALUES (@IdLoai,@TenChuChiNhanh,@SoDienThoaiChiNhanh,@DiaChiChiNhanh,@Phuong,@Quan,@ThanhPho,@IdCuaHang,@Image)";
+            SqlCommand cmd = new SqlCommand(strCmd, con);
+            cmd.Parameters.Add(new SqlParameter("@IdLoai", newCn.IdLoai));
+            cmd.Parameters.Add(new SqlParameter("@Image", newCn.Image));
+            cmd.Parameters.Add(new SqlParameter("@TenChuChiNhanh", newCn.TenChuChiNhanh));
+            cmd.Parameters.Add(new SqlParameter("@SoDienThoaiChiNhanh", newCn.SoDienThoaiChiNhanh));
+            cmd.Parameters.Add(new SqlParameter("@DiaChiChiNhanh", newCn.DiaChiChiNhanh));
+            cmd.Parameters.Add(new SqlParameter("@Phuong", newCn.Phuong));
+            cmd.Parameters.Add(new SqlParameter("@Quan", newCn.Quan));
+            cmd.Parameters.Add(new SqlParameter("@ThanhPho", newCn.ThanhPho));
+            cmd.Parameters.Add(new SqlParameter("@IdCuaHang", newCn.IdCuaHang));
+            return cmd.ExecuteNonQuery() > 0;
+        }
+        
     }
 }

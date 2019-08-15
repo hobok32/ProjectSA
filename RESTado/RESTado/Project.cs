@@ -41,15 +41,25 @@ namespace RESTado
         public string Image { get; set; }
     }
 
+    public class BinhLuanCuaHang
+    {
+        public int Id { get; set; }
+        public string PhoneAcc { get; set; }
+        public string BinhLuan { get; set; }
+        public int IdCuaHang { get; set; }
+    }
+
     public class ChiNhanhVaTraiCayByIdCH
     {
-        public ChiNhanhVaTraiCayByIdCH(List<ChiNhanh> cn, List<Fruit> fruits)
+        public ChiNhanhVaTraiCayByIdCH(List<ChiNhanh> cn, List<Fruit> fruits, List<BinhLuanCuaHang> cmt)
         {
             ChiNhanh = cn;
             Fruits = fruits;
+            BinhLuan = cmt;
         }
 
         public List<ChiNhanh> ChiNhanh { get; set; }
         public List<Fruit> Fruits { get; set; }
+        public List<BinhLuanCuaHang> BinhLuan { get; set; }
     }
 }
