@@ -7,8 +7,10 @@ export default class FlatListItem extends Component {
         this.state = {
             activeRowKey: null,
             color: "darkslateblue",
-            colorN: "tan",
+            colorN: "darkolivegreen",
             isColor: false,
+            fruit: "",
+            isLoading: true
         }
     }
     colorChange = () => {
@@ -16,6 +18,18 @@ export default class FlatListItem extends Component {
     }
     resetColor = () => {
         this.setState({ isColor: false })
+    }
+    getFruit = (id) => {
+        fetch(`http://projectsa.gear.host/api/GetFruitByIdCN/${id}`, { method: "GET", body: null })
+            .then((response) => response.json())
+            .then((responseData) => {
+                this.setState({
+                    fruit: responseData
+                })
+                console.log(this.state.data)
+                this.setState({ isLoading: false })
+            })
+            .done()
     }
     render() {
         return (
@@ -43,25 +57,30 @@ export default class FlatListItem extends Component {
                         position: 'absolute',
                         top: 0, bottom: 0, left: 0, right: 0
                     }}
-                    onPress={() => this.props.screenProps.handleChangeItem(
-                        'id', `${this.props.item.Id}`,
-                        'idType', `${this.props.item.IdLoai}`,
-                        'phoneNum', `${this.props.item.SoDienThoaiChiNhanh}`,
-                        'address', `${this.props.item.DiaChiChiNhanh}`,
-                        'phuong', `${this.props.item.Phuong}`,
-                        'quan', `${this.props.item.Quan}`,
-                        'city', `${this.props.item.ThanhPho}`,
-                        'idStore', `${this.props.item.IdCuaHang}`,
-                        'image', `${this.props.item.Image}`,
-                        'nameOwner', `${this.props.item.TenChuChiNhanh}`
-                    )}
+                    onPress={() => {
+                        this.props.screenProps.handleChangeItem(
+                            'id', `${this.props.item.Id}`,
+                            'idType', `${this.props.item.IdLoai}`,
+                            'phoneNum', `${this.props.item.SoDienThoaiChiNhanh}`,
+                            'address', `${this.props.item.DiaChiChiNhanh}`,
+                            'phuong', `${this.props.item.Phuong}`,
+                            'quan', `${this.props.item.Quan}`,
+                            'city', `${this.props.item.ThanhPho}`,
+                            'idStore', `${this.props.item.IdCuaHang}`,
+                            'image', `${this.props.item.Image}`,
+                            'nameOwner', `${this.props.item.TenChuChiNhanh}`
+                        )
+                    }}
                     onPressIn={this.colorChange}
                     onPressOut={this.resetColor}
-                    onLongPress={() => this.props.screenProps._onPressDetailModal(
-                        this.props.nameStore,
-                        this.props.item.Image,
-                        this.props.item.Id
-                    )}
+                    onLongPress={async () => {
+                        this.props.screenProps._onPressDetailModal(
+                            this.props.nameStore,
+                            this.props.item.Image,
+                            this.props.item.Id,
+                            this.props.item.IdLoai)
+
+                    }}
                 >
                 </TouchableOpacity>
             </View>

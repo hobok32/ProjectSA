@@ -16,7 +16,8 @@ export default class FruitStore extends Component {
         super(props);
         this.state = {
             search: '',
-            data: ''
+            data: '',
+            refresh: false,
         }
     }
 
@@ -37,9 +38,66 @@ export default class FruitStore extends Component {
             .done()
     }
 
+    Search = async (search) => {
+        if (search == "") {
+            await fetch(`http://projectsa.gear.host/api/getAllFruitStore`, { method: "GET", body: null })
+                .then((response) => response.json())
+                .then((responseData) => {
+                    this.setState({
+                        data: responseData
+                    })
+                })
+                .done()
+            this.refresh()
+        } else {
+            this.setState({
+                refresh: true
+            })
+            fetch(`http://projectsa.gear.host/api/getAllFruitStore/${search}`, { method: "GET", body: null })
+                .then((response) => response.json())
+                .then((responseData) => {
+                    this.setState({
+                        data: responseData,
+                        refresh: false
+                    })
+                })
+                .done()
+        }
+    }
+
     _onPressStoreModal = () => {
         console.log('show modal')
         this.refs.storeModal.showStoreModal();
+    }
+
+    filterDistrist = async (dis) => {
+        this.setState({
+            refresh: true
+        })
+        await fetch(`http://projectsa.gear.host/api/getAllFruitStore/distrist/${dis}`, { method: "GET", body: null })
+            .then((response) => response.json())
+            .then((responseData) => {
+                this.setState({
+                    data: responseData,
+                    refresh: false
+                })
+            })
+            .done()
+    }
+
+    refresh() {
+        this.setState({
+            refresh: true
+        })
+        fetch(`http://projectsa.gear.host/api/getAllFruitStore`, { method: "GET", body: null })
+            .then((response) => response.json())
+            .then((responseData) => {
+                this.setState({
+                    data: responseData,
+                    refresh: false
+                })
+            })
+            .done()
     }
 
     render() {
@@ -55,34 +113,35 @@ export default class FruitStore extends Component {
                         value={this.state.search}
                         onChangeText={this.handleChange('search')}
                     />
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.Search(this.state.search)}>
                         <Search name="search" size={40} style={styles.searchBtn} />
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.viewFilter}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.filterDistrist(1)}>
                         <Text style={styles.filterBtn}>Quận 1</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.filterDistrist(3)}>
                         <Text style={styles.filterBtn}>Quận 3</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.filterDistrist(5)}>
                         <Text style={styles.filterBtn}>Quận 5</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.viewStores}>
                     <FlatList
+                        showsVerticalScrollIndicator={false}
                         data={this.state.data}
                         renderItem={({ item, index, navigation = this.props.navigation }) => {
                             return (
                                 <FlatListStoreItem_Grid item={item} index={index} parentFlatList={this}
                                     screenProps={{
                                         ...this.state,
-                                        _onPressStoreModal: this._onPressStoreModal
+                                        _onPressStoreModal: this._onPressStoreModal,
                                     }}
                                     navigation={navigation}
                                 >
@@ -93,8 +152,8 @@ export default class FruitStore extends Component {
                         keyExtractor={(item) => item.Id}
                         horizontal={false}
                         numColumns={2}
-                    // refreshing={this.state.refresh}
-                    // onRefresh={()=>this.refresh()}
+                        refreshing={this.state.refresh}
+                        onRefresh={() => this.refresh()}
                     >
 
                     </FlatList>

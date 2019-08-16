@@ -4,6 +4,7 @@ import FlatListItem from './Items';
 import { TextInput } from 'react-native-gesture-handler';
 import IconSearch from 'react-native-vector-icons/Feather';
 import DetailModal from './DetailModal';
+import StoreModal from './Project/ModalStore';
 width = Dimensions.get("window").width;
 height = Dimensions.get("window").height;
 
@@ -32,7 +33,9 @@ export default class MainScreen extends Component {
             nameStoreDetail: "",
             imgDetail: "",
             idChiNhanhDetail: "",
+            idLoaiDetail: "",
             fruit: "",
+            fruitCN: "",
             isLoading: true
         }
     }
@@ -49,7 +52,6 @@ export default class MainScreen extends Component {
                 // console.log(this.state.fruit[0].Name)
             })
             .done()
-
     }
     handleChangeItem = (
         state1, value1,
@@ -203,13 +205,17 @@ export default class MainScreen extends Component {
             })
             .done()
     }
-    _onPressDetailModal = (nameStore, img, idChiNhanh) => {
+    _onPressDetailModal = (nameStore, img, idChiNhanh, idLoai) => {
         this.setState({
             nameStoreDetail: nameStore,
             imgDetail: img,
-            idChiNhanhDetail: idChiNhanh
+            idChiNhanhDetail: idChiNhanh,
+            idLoaiDetail: idLoai,
         })
         this.refs.detailModal.showDetailModal();
+    }
+    _onPressStoreModal = () => {
+        this.refs.storeModal.showStoreModal();
     }
     _scrollToEnd = () => {
         this.refs.flatList.scrollToEnd(true);
@@ -218,8 +224,8 @@ export default class MainScreen extends Component {
         this.refs.flatList.scrollToIndex({ animated: true, index: ind - 1 });
     }
     fruit = (f) => {
-        if (f.length > 0) {
-            let a = "";
+        let a = "";
+        if (f.length > 1) {
             for (i = 0; i < f.length; i++) {
                 a = a + f[i].Name + ', '
                 if (i == f.length - 2)
@@ -228,20 +234,32 @@ export default class MainScreen extends Component {
             a = a + f[f.length - 1].Name
             return a;
         }
+        else if (f.length == 1)
+            return a = f[0].Name;
         else
-            return a = "..."
+            return a = "Hông có bán trái nào hếc!"
 
+    }
+    fruitNum = (idLoai) => {
+        let count = 0;
+        if (idLoai == 1)
+            count = 6;
+        else if (idLoai == 2)
+            count = 4;
+        else count = 2;
+        return count;
     }
     render() {
         if (!this.state.isLoading) {
-            console.log(this.state.fruit)
             return (
                 < KeyboardAvoidingView style={styles.container} behavior="height" enabled >
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={styles.container}>
-                            <Text style={styles.headerText}>
-                                {this.props.navigation.getParam('item').TenCuaHang}
+                            <TouchableOpacity onPress={() => this._onPressStoreModal()}>
+                                <Text style={styles.headerText}>
+                                    {this.props.navigation.getParam('item').TenCuaHang} - Ấn để thêm trái cây
                             </Text>
+                            </TouchableOpacity>
                             <ScrollView>
                                 <View style={styles.headerView}>
                                     <Text style={styles.detailParam}>Chủ cửa hàng: {this.props.navigation.getParam('item').TenChuCuaHang}</Text>
@@ -253,6 +271,9 @@ export default class MainScreen extends Component {
                                     </Text>
                                     <Text style={styles.detailParam}>
                                         Số điện thoại: {this.props.navigation.getParam('item').SoDienThoaiCuaHang}
+                                    </Text>
+                                    <Text style={styles.detailParam}>
+                                        Loại: {this.props.navigation.getParam('item').IdLoai} (Tối đa {this.fruitNum(this.props.navigation.getParam('item').IdLoai)} trái cây)
                                     </Text>
                                     <Text style={styles.detailParam}>
                                         Trái cây: {this.fruit(this.state.fruit)}
@@ -403,8 +424,20 @@ export default class MainScreen extends Component {
                                     </ScrollView>
                                 </View>
                             </View>
-                            <DetailModal screenProps={{ ...this.state }} ref={'detailModal'}></DetailModal>
+
                         </View>
+                        <DetailModal
+                            screenProps={{ ...this.state }}
+                            ref={'detailModal'}
+                            navigation={this.props.navigation}
+                        />
+                        <StoreModal
+                            navigation={this.props.navigation}
+                            screenProps={{ ...this.state }}
+                            ref={'storeModal'}
+                            countFruit={this.state.fruit.length}
+                            type={this.props.navigation.getParam('item').IdLoai}
+                            idch={this.props.navigation.getParam('item').Id} />
                     </ScrollView>
                 </KeyboardAvoidingView >
             );
@@ -430,7 +463,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: 15, fontWeight: "bold", textAlign: "left", margin: 15, borderRadius: 10,
-        color: "slateblue", borderBottomWidth: 0, marginBottom: 0, elevation: 0, backgroundColor: "gainsboro"
+        color: "darkslateblue", borderBottomWidth: 0, marginBottom: 0, elevation: 0, backgroundColor: "gainsboro"
     },
     headerView: {
         flex: 3, backgroundColor: 'gainsboro'
@@ -439,13 +472,13 @@ const styles = StyleSheet.create({
         flex: 4, borderBottomWidth: 0, margin: 0
     },
     idHeader: {
-        fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 5, width: this.width * 0.2, color: "black"
+        fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 5, width: this.width * 0.2, color: "saddlebrown"
     },
     nameHeader: {
-        fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 5, width: this.width * 0.4, color: "black"
+        fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 5, width: this.width * 0.4, color: "saddlebrown"
     },
     typeHeader: {
-        fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 5, width: this.width * 0.3, color: "black"
+        fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 5, width: this.width * 0.3, color: "saddlebrown"
     },
     //Body
     detailView: {

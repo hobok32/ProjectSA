@@ -72,6 +72,23 @@ export default class LoginScreen extends React.Component {
         return null;
     }
 
+    addUser = (phone, name) => {
+        fetch("http://projectsa.gear.host/api/addUser",
+            {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                    {
+                        Phone: phone,
+                        Name: name
+                    })
+            })
+            .done()
+    }
+
     loginForm = async () => {
         if (this.state.phone.length < 10) {
             Alert.alert('Error', 'Phone number must > 10')
@@ -115,6 +132,7 @@ export default class LoginScreen extends React.Component {
             } else {
                 User.phone = this.state.phone;
                 firebase.database().ref('users/' + User.phone).set({ name: this.state.name });
+                this.addUser(this.state.phone, this.state.name)
                 // this.props.navigation.navigate('App');
                 Alert.alert('GO', 'Sussess!')
             }
