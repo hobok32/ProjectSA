@@ -141,6 +141,28 @@ namespace RESTado
             return fruits;
         }
 
+        public List<Fruit> SelectAllFruitByIdCN(int IdCH)
+        {
+            List<Fruit> fruits = new List<Fruit>();
+            SqlConnection con = new SqlConnection(strCon);
+            con.Open();
+            string strCmd = "select c.* from chinhanh a, chitietchinhanh b, fruit c where a.Id=@Id and a.Id=b.IdCN and b.IdTraiCay = c.Id";
+            SqlCommand cmd = new SqlCommand(strCmd, con);
+            cmd.Parameters.Add(new SqlParameter("@Id", IdCH));
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                Fruit f = new Fruit();
+                f.Id = (int)dr["Id"];
+                f.Name = (string)dr["Name"];
+                f.Price = (int)dr["Price"];
+                f.Season = (string)dr["Season"];
+                fruits.Add(f);
+            }
+            con.Close();
+            return fruits;
+        }
+
         public List<ChiNhanh> SelectAllFruitChiNhanh()
         {
             List<ChiNhanh> cn = new List<ChiNhanh>();
@@ -298,5 +320,37 @@ namespace RESTado
             return cmd.ExecuteNonQuery() > 0;
         }
         
+        public bool AddFruitCuaHang(ChiTietCuaHang ctch)
+        {
+            SqlConnection con = new SqlConnection(strCon);
+            con.Open();
+            string strCmd = "INSERT INTO chitietcuahang VALUES(@IdCH, @IdTraiCay)";
+            SqlCommand cmd = new SqlCommand(strCmd, con);
+            cmd.Parameters.Add(new SqlParameter("@IdCH", ctch.IdCH));
+            cmd.Parameters.Add(new SqlParameter("@IdTraiCay", ctch.IdTraiCay));
+            return cmd.ExecuteNonQuery() > 0;
+        }
+
+        public bool AddFruitChiNhanh(ChiTietChiNhanh ctcn)
+        {
+            SqlConnection con = new SqlConnection(strCon);
+            con.Open();
+            string strCmd = "INSERT INTO chitietchinhanh VALUES(@IdCN, @IdTraiCay)";
+            SqlCommand cmd = new SqlCommand(strCmd, con);
+            cmd.Parameters.Add(new SqlParameter("@IdCN", ctcn.IdCN));
+            cmd.Parameters.Add(new SqlParameter("@IdTraiCay", ctcn.IdTraiCay));
+            return cmd.ExecuteNonQuery() > 0;
+        }
+
+        public bool AddUser(Account user)
+        {
+            SqlConnection con = new SqlConnection(strCon);
+            con.Open();
+            string strCmd = "INSERT INTO account VALUES(@Phone, @Name)";
+            SqlCommand cmd = new SqlCommand(strCmd, con);
+            cmd.Parameters.Add(new SqlParameter("@Phone", user.Phone));
+            cmd.Parameters.Add(new SqlParameter("@Name", user.Name));
+            return cmd.ExecuteNonQuery() > 0;
+        }
     }
 }

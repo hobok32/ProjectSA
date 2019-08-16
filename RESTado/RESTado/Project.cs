@@ -62,4 +62,24 @@ namespace RESTado
         public List<Fruit> Fruits { get; set; }
         public List<BinhLuanCuaHang> BinhLuan { get; set; }
     }
+
+    public class ChiTietCuaHang
+    {
+        public int Id { get; set; }
+        public int IdCH { get; set; }
+        public int IdTraiCay { get; set; }
+    }
+
+    public class ChiTietChiNhanh
+    {
+        public int Id { get; set; }
+        public int IdCN { get; set; }
+        public int IdTraiCay { get; set; }
+    }
+
+    public class Account
+    {
+        public string Phone { get; set; }
+        public string Name { get; set; }
+    }
 }
