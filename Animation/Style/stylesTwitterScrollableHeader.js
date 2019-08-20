@@ -34,15 +34,18 @@ const styles = StyleSheet.create({
         height: PROFILE_IMAGE_MAX_HEIGHT,
         borderWidth: 1,
         borderColor: 'white',
-        marginLeft: 10
+        marginLeft: 10, backgroundColor: 'black'
     },
     txt: {
         fontWeight: 'bold',
-        fontSize: 26,
+        fontSize: 15,
         alignSelf: 'flex-start',
         color: 'darkolivegreen',
-        marginLeft: 20,
-        borderBottomWidth: 1
+        marginLeft: 10,
+        borderBottomWidth: 0,
+        borderBottomColor: 'slateblue',
+        width: PROFILE_IMAGE_MAX_HEIGHT,
+        textAlign: 'center'
     },
     viewAddFruit: {
         flex: 1,
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
     },
     pickerFruit: {
         height: PROFILE_IMAGE_MAX_HEIGHT / 2,
-        width: 110, borderWidth: 1,
+        width: 115, borderWidth: 1,
         borderColor: 'black'
     },
     viewAddIcon: {
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
         height: PROFILE_IMAGE_MAX_HEIGHT / 2,
         flexDirection: 'row',
         marginRight: 20
-    }
+    },
 })
 
 export default styles;
