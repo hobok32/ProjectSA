@@ -106,7 +106,7 @@ export default class TwitterScrollableHeader extends Component {
                     </View>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <Text style={styles.txt}>
+                    <Text style={styles.txt} onPress={() => this.props.navigation.navigate('Stack')}>
                         Ân Fruit
                     </Text>
                 </View>
